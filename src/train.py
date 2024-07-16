@@ -5,9 +5,18 @@ from datetime import datetime
 
 
 
-def train_loaded_model(model_path, checkpoint_dir_path , train_dataset, val_dataset, optimizer, use_early_stoping=False ,epochs=100, early_stopping_patience=10):
+def lr_schedule(epoch, lr):
+    """
+    Reduce the learning rate every 7 epochs by a factor of 0.5.
+    """
+    if (epoch + 1) % 10 == 0:
+        return lr * 0.8
+    return lr
+
+def train_model(model, checkpoint_dir_path , train_dataset, val_dataset, optimizer,lr_schedule=lr_schedule, use_early_stoping=False ,epochs=100, early_stopping_patience=10):
     
-    model = load_model(model_path, custom_objects={'CTCLayer': CTCLayer}, compile=False)
+    if isinstance(model, str):
+        model = load_model(model, custom_objects={'CTCLayer': CTCLayer}, compile=False)
     
 
     # Define the ModelCheckpoint callback with the epoch number, train loss, val loss, and Egypt time
@@ -39,19 +48,13 @@ def train_loaded_model(model_path, checkpoint_dir_path , train_dataset, val_data
         callbacks=callbacks
     )
 
-    return history
+    return history, model
 
 
 
 
 
-def lr_schedule(epoch, lr):
-    """
-    Reduce the learning rate every 7 epochs by a factor of 0.5.
-    """
-    if (epoch + 1) % 10 == 0:
-        return lr * 0.8
-    return lr
+
 
 
 def get_egypt_time():

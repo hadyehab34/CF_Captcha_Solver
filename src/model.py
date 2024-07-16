@@ -28,7 +28,7 @@ class CTCLayer(layers.Layer):
         # At test, just return the computed predictions
         return y_pred
 
-def build_model():
+def build_model(img_width=img_width, img_height=img_height ):
     # Inputs the model
     input_img = layers.Input(
         shape=(img_width, img_height, 1), name="image", dtype="float32"

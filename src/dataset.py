@@ -43,7 +43,7 @@ def split_data(data_dir, codec='png', train_size=0.7, val_size=0.15, test_size=0
 
 
 # Create TensorFlow datasets for training, validation, and test sets
-def create_dataset(X, y, batch_size, augment=True):
+def create_dataset(X, y, batch_size, augment=False):
     dataset = tf.data.Dataset.from_tensor_slices((X, y))
     if augment:
         dataset = (
@@ -70,6 +70,6 @@ def create_dataset(X, y, batch_size, augment=True):
 # batch_size = 32
 
 # # Create datasets for training, validation, and test sets
-# train_dataset = create_dataset(X_train, y_train, batch_size, augment=True)
+# train_dataset = create_dataset(X_train, y_train, batch_size, augment=False)
 # val_dataset = create_dataset(X_val, y_val, batch_size, augment=False)  # No augmentation for validation
 # test_dataset = create_dataset(X_test, y_test, batch_size, augment=False)  # No augmentation for test

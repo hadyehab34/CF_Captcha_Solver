@@ -36,7 +36,7 @@ def augment_image(img):
     return img
 
 # Define encoding functions
-def encode_single_sample(img_path, label):
+def encode_single_sample(img_path, label, img_width=img_width, img_height=img_height):
     img_path = tf.strings.join([img_path])  # Ensure img_path is a string
 
     # 1. Read image
@@ -58,7 +58,7 @@ def encode_single_sample(img_path, label):
 
 
 # Define encoding functions
-def encode_single_sample_pred(img_path):
+def encode_single_sample_pred(img_path, img_width=img_width, img_height=img_height):
     img_path = tf.strings.join([img_path])  # Ensure img_path is a string
 
     # 1. Read image
@@ -75,7 +75,7 @@ def encode_single_sample_pred(img_path):
     return {"image": img}
 
 # Define function to encode augmented samples
-def encode_augmented_samples(img_path, label, num_augmented_versions=3):
+def encode_augmented_samples(img_path, label, num_augmented_versions=3, img_width=img_width, img_height=img_height):
     img_path = tf.strings.join([img_path])  # Ensure img_path is a string
 
     # 1. Read image
